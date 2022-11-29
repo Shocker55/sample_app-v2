@@ -50,6 +50,6 @@ test:
 #
 production:
   <<: *default
-  database: my_plants_production
-  username: my_plants
+  database: <%= ENV["MY_PLANTS_DATABASE_NAME"] %>
+  username: <%= ENV["MY_PLANTS_DATABASE_USERNAME"] %>
   password: <%= ENV["MY_PLANTS_DATABASE_PASSWORD"] %>

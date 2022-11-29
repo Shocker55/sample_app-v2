@@ -8,6 +8,7 @@ gem "rails", "~> 7.0.4"
 
 # Use mysql as the database for Active Record
 gem "mysql2", "~> 0.5"
+gem 'dotenv-rails'
 gem "image_processing",           "1.12.2"
 gem "faker",                      "2.21.0"
 gem "active_storage_validations", "0.9.8"
