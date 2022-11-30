@@ -46,6 +46,8 @@ group :development do
 end
 
 group :test do
+  # featuretテスト用
+  gem 'capybara'
 end
 
 group :production do
