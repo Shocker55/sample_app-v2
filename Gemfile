@@ -10,6 +10,7 @@ gem 'rails', '~> 7.0.4'
 gem 'active_storage_validations', '0.9.8'
 gem 'bcrypt',                     '3.1.18'
 gem 'bootsnap',                   '1.12.0', require: false
+gem "bootstrap-sass",             "3.4.1"
 gem 'dotenv-rails'
 gem 'faker', '2.21.0'
 gem 'image_processing', '1.12.2'
