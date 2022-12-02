@@ -32,7 +32,7 @@ RSpec.describe "StaticPages", type: :request do
 
   describe "GET /contact" do
     it "returns http success" do
-      get "/static_pages/contact"
+      get contact_path
       expect(response).to have_http_status(:success)
     end
   end
