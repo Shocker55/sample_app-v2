@@ -8,12 +8,13 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
   </head>
   <body>
-    <%= render 'layouts/header-home' %>
+    <%= render 'layouts/header-top' %>
     <div class="container">
       <% flash.each do |message_type, message| %>
-        <div class="alert alert-<% message_type %>"><%= message %></div>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
       <% end %>
       <%= yield %>
       <%= render 'layouts/footer' %>
