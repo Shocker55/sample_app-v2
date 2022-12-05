@@ -1,5 +1,4 @@
 module UsersHelper
-
   # Return Grabatar image by a hash of email with MD5
   def gravatar_for(user, size: 80)
     gravatar_id = Digest::MD5::hexdigest(user.email.downcase)

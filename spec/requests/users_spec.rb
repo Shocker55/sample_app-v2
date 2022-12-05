@@ -24,7 +24,7 @@ RSpec.describe "Users", type: :request do
     let(:user_params) { { user: { name: "Example User",
                                   email: "user@exampe.com",
                                   password: "password",
-                                  password_confirmation: "password"} } }
+                                  password_confirmation: "password" } } }
 
     it "is saved" do
       expect {
@@ -41,6 +41,11 @@ RSpec.describe "Users", type: :request do
     it "shows a flash" do
       post users_path, params: user_params
       expect(flash).to be_any
+    end
+
+    it 'ログイン状態であること' do
+      post users_path, params: user_params
+      expect(logged_in?).to be_truthy
     end
   end
 end
