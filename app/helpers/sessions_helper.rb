@@ -10,8 +10,14 @@ module SessionsHelper
   end
 
   def current_user
-    if session[:user_id]
-      @current_user ||= User.find_by(id: session[:user_id])
+    if (user_id = session[:user_id])
+      @current_user ||= User.find_by(id: user_id)
+    elsif (user_id = cookies.encrypted[:user_id])
+      user = User.find_by(id: user_id)
+      if user && user.authenticated?(cookies[:remeber_token])
+        log_in user
+        @current_user = user
+      end
     end
   end
 
@@ -19,7 +25,15 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  # delete cookies. 下記のlog_out時に呼び出される。
+  def forget(user)
+    user.forget
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
+  end
+
   def log_out
+    forget(current_user)
     reset_session
     @current_user = nil
   end
