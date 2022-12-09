@@ -20,26 +20,26 @@
       <%# </ul> %>
       <%# <ul class="nav navbar-nav navbar-right"> %>
         <% if logged_in? %>
-        <li><%= link_to "My Dialy", '#',class: "" %></li>
-        <li><%= link_to "Users", '#' %></li>
-        <li class="dropdown">
-          <a href="#" id="account" class="dropdown-toggle">
-            Account <b class="caret"></b>
-          </a>
-          <ul id="dropdown-menu" class="dropdown-menu">
-            <li><%= link_to "Profile", current_user %></li>
-            <li><%= link_to "Settings", '#' %></li>
-            <li class="divider"></li>
-            <li>
-              <%= link_to "Log out", logout_path,
-                                      date: { "turbo-method": :delete } %>
-            </li>
-          </ul>
-        </li>
+          <li><%= link_to "My Dialy", '#',class: "" %></li>
+          <li><%= link_to "Users", '#' %></li>
+          <li class="dropdown">
+            <a href="#" id="account" class="dropdown-toggle">
+              Account <b class="caret"></b>
+            </a>
+            <ul id="dropdown-menu" class="dropdown-menu">
+              <li><%= link_to "Profile", current_user %></li>
+              <li><%= link_to "Settings", '#' %></li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to "Log out", logout_path,
+                                        date: { "turbo-method": :delete } %>
+              </li>
+            </ul>
+          </li>
         <% else %>
-        <li><%= link_to "ゲストログイン", '#',class: "btn btn01" %></li>
-        <li><%= link_to "ログイン", '#',class: "btn btn01" %></li>
-        <li><%= link_to "新規作成", '#', class: "btn  btn01" %></li>
+          <li><%= link_to "ゲストログイン", '#', class: "btn btn01" %></li>
+          <li><%= link_to "ログイン", login_path, class: "btn btn01" %></li>
+          <li><%= link_to "新規作成", '#', class: "btn  btn01" %></li>
         <% end %>
       <%# </ul> %>
       </ul>
