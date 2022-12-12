@@ -48,4 +48,9 @@ RSpec.describe "Users", type: :request do
       expect(is_logged_in?).to be_truthy
     end
   end
+
+  # describe "Patch /users" do
+  #   let!(:user) { FactoryBot.create(:user) }
+
+  #   it ""
 end
