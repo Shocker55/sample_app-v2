@@ -43,53 +43,72 @@ RSpec.describe "Users", type: :request do
       expect(flash).to be_any
     end
 
-    it 'ログイン状態であること' do
+    it "ログイン状態であること" do
       post users_path, params: user_params
       expect(is_logged_in?).to be_truthy
+    end
+
+    describe "Get /users/{id}/edit" do
+      let(:user) { FactoryBot.create(:user) }
+
+      it "returns http success" do
+        log_in_as user
+        get edit_user_path(user)
+        expect(response).to have_http_status(:success)
+      end
+
+      it "redirects edit when not logged in" do
+        get edit_user_path(user)
+        expect(flash).to_not be_empty
+        expect(response).to redirect_to login_path
+      end
     end
   end
 
   describe "Patch /users" do
-    let!(:user) { FactoryBot.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
     it "returns http success" do
+      log_in_as user
       get edit_user_path(user)
       expect(response).to have_http_status(:success)
     end
 
+    it "redirects yodate when not logged in" do
+      get edit_user_path(user)
+      expect(flash).to_not be_empty
+      expect(response).to redirect_to login_path
+    end
+
     context "invalid information" do
-      it "is enable to update" do
+      before do
+        log_in_as user
         patch user_path(user), params: { user: { name: "",
                                                  email: "user@invlid",
                                                  password: "foo",
                                                  password_confirmation: "bar" } }
+      end
+
+      it "is enable to update" do
         user.reload
         expect(user.name).to_not eq ""
         expect(user.email).to_not eq ""
         expect(user.password).to_not eq "foo"
         expect(user.password_confirmation).to_not eq "bar"
       end
-    end
 
       it "renders an edit page after reloading" do
-        get edit_user_path(user)
-        patch user_path(user), params: { user: { name: "",
-                                                 email: "user@invlid",
-                                                 password: "foo",
-                                                 password_confirmation: "bar" } }
         expect(response.body).to include "<title>Edit user</title>"
       end
 
       it "shows errors" do
-        patch user_path(user), params: { user: { name: "",
-                                                 email: "user@invlid",
-                                                 password: "foo",
-                                                 password_confirmation: "bar" } }
         expect(response.body).to include "The form contains 4 errors"
       end
+    end
 
     context "valid information" do
       before do
+        log_in_as user
         @name = "Foo Bar"
         @email = "foo@bar.com"
         patch user_path(user), params: { user: { name: @name,
