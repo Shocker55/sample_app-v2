@@ -47,25 +47,9 @@ RSpec.describe "Users", type: :request do
       post users_path, params: user_params
       expect(is_logged_in?).to be_truthy
     end
-
-    describe "Get /users/{id}/edit" do
-      let(:user) { FactoryBot.create(:user) }
-
-      it "returns http success" do
-        log_in_as user
-        get edit_user_path(user)
-        expect(response).to have_http_status(:success)
-      end
-
-      it "redirects edit when not logged in" do
-        get edit_user_path(user)
-        expect(flash).to_not be_empty
-        expect(response).to redirect_to login_path
-      end
-    end
   end
 
-  describe "Patch /users" do
+  describe "Get /users/{id}/edit" do
     let(:user) { FactoryBot.create(:user) }
 
     it "returns http success" do
@@ -74,10 +58,44 @@ RSpec.describe "Users", type: :request do
       expect(response).to have_http_status(:success)
     end
 
-    it "redirects yodate when not logged in" do
+    it "redirects edit when not logged in" do
       get edit_user_path(user)
       expect(flash).to_not be_empty
       expect(response).to redirect_to login_path
+    end
+
+    context "wrong user" do
+      let(:other_user) { FactoryBot.create(:archer) }
+
+      it "redirects edit whne logged in as wrong user" do
+        log_in_as other_user
+        get edit_user_path(user)
+        expect(flash).to be_empty
+        expect(response).to redirect_to root_path
+      end
+    end
+  end
+
+  describe "Patch /users" do
+    let(:user) { FactoryBot.create(:user) }
+
+    it "redirects update when not logged in" do
+      patch user_path(user)
+      expect(flash).to_not be_empty
+      expect(response).to redirect_to login_path
+    end
+
+    context "wrong user" do
+      let(:other_user) { FactoryBot.create(:archer) }
+
+      it "redirects edit whne logged in as wrong user" do
+        log_in_as other_user
+        get edit_user_path(user)
+        patch user_path(user), params: { user: { name: user.name,
+                                                       email: user.email } }
+        expect(flash).to be_empty
+        expect(response).to redirect_to root_path
+      end
     end
 
     context "invalid information" do

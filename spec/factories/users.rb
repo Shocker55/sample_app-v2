@@ -7,3 +7,13 @@ FactoryBot.define do
     password_confirmation { "password" }
   end
 end
+
+FactoryBot.define do
+  # factoryの名前をモデル名とは別にしたい場合は、以下のようにクラスを指定する
+  factory :archer, class: "User" do
+    name { "Sterling Archer" }
+    sequence(:email) { |n| "test#{n}@example.gov" }
+    password { "foobar" }
+    password_confirmation { "foobar" }
+  end
+end
