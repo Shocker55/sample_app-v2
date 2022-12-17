@@ -49,6 +49,13 @@ RSpec.describe "Users", type: :request do
     end
   end
 
+  describe "Get /users" do
+    it "redirects index when not logged in" do
+      get users_path
+      expect(response).to redirect_to login_path
+    end
+  end
+
   describe "Get /users/{id}/edit" do
     let(:user) { FactoryBot.create(:user) }
 
@@ -58,16 +65,24 @@ RSpec.describe "Users", type: :request do
       expect(response).to have_http_status(:success)
     end
 
-    it "redirects edit when not logged in" do
-      get edit_user_path(user)
-      expect(flash).to_not be_empty
-      expect(response).to redirect_to login_path
+    context "not logged in" do
+      it "redirects edit when not logged in" do
+        get edit_user_path(user)
+        expect(flash).to_not be_empty
+        expect(response).to redirect_to login_path
+      end
+
+      it "redirects edit when user get logged in" do
+        get edit_user_path(user)
+        log_in_as user
+        expect(response).to redirect_to edit_user_path(user)
+      end
     end
 
     context "wrong user" do
       let(:other_user) { FactoryBot.create(:archer) }
 
-      it "redirects edit whne logged in as wrong user" do
+      it "redirects edit when logged in as wrong user" do
         log_in_as other_user
         get edit_user_path(user)
         expect(flash).to be_empty
