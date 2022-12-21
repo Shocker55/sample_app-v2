@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "Layouts", type: :system do
-  before do
-    driven_by(:rack_test)
-  end
+RSpec.describe "Layouts", type: :system, js: true do
+  # before do
+  #   driven_by(:selenium_chrome)
+  # end
 
-  let(:user) { FactoryBot.create(user) }
+  let(:user) { FactoryBot.create(:user) }
 
   describe "header" do
     context "loging in" do
@@ -14,36 +14,39 @@ RSpec.describe "Layouts", type: :system do
         visit root_path
       end
 
-      # it "redirects root when Title is clicked" do
-      #   click_link "My Plants"
-      #   expect(page.current_path).to eq root_path
-      # end
+      it "redirects root when Title is clicked" do
+        click_link "My Plants"
+        expect(page.current_path).to eq root_path
+      end
 
-      # it "redirects user index when Users is clicked" do
-      #   click_link "Users"
-      #   expect(page.current_path).to eq users_path
-      # end
+      it "redirects user index when Users is clicked" do
+        click_link "Users"
+        expect(page.current_path).to eq users_path
+      end
 
-      # context "Account" do
-      #   before do
-      #     click_link "Account"
-      #   end
+      context "Account" do
+        # before do
+        #   click_link "Account"
+        # end
 
-    #     it "redirects user page when Profile is clicked" do
-    #       click_link "Profile"
-    #       expect(page.current_path).to eq user_path(user)
-    #     end
+        it "redirects user page when Profile is clicked" do
+          click_link "Account"
+          click_link "Profile"
+          expect(page.current_path).to eq user_path(user)
+        end
 
-    #     it "redirects correct page when Settings is clicked" do
-    #       click_link "Settings"
-    #       expect(page.current_path).to eq edit_user_path(user)
-    #     end
+        it "redirects correct page when Settings is clicked" do
+          click_link "Account"
+          click_link "Settings"
+          expect(page.current_path).to eq edit_user_path(user)
+        end
 
-    #     it "redirects root when Log out is clicked" do
-    #       click_link "Log out"
-    #       expect(page.current_path).toeq root_path
-    #     end
-    #   end
+        it "redirects root when Log out is clicked" do
+          click_link "Account"
+          click_link "Log out"
+          expect(page.current_path).to eq root_path
+        end
+      end
     end
 
     context "not logging in" do
@@ -51,10 +54,10 @@ RSpec.describe "Layouts", type: :system do
         visit root_path
       end
 
-      # it "redirects root when title is clicked" do
-      #   click_link "My plants"
-      #   expect(page.current_path).to eq root_path
-      # end
+      it "redirects root when title is clicked" do
+        click_link "My Plants"
+        expect(page.current_path).to eq root_path
+      end
 
       it "redirects login page when ログイン is clicked" do
         click_link "ログイン"

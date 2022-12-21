@@ -32,7 +32,6 @@ group :development, :test do
   gem 'rspec-rails' # Tips: https://qiita.com/amatsukix/items/578f85cf4565ca2a797c
   gem 'spring-commands-rspec'
 
-
   #  RuboCop
   gem 'rubocop'
   gem 'rubocop-rails'
@@ -50,8 +49,8 @@ end
 group :test do
   # featuretテスト用
   gem 'capybara'
-  gem 'selenium-webdriver'
   gem "database_cleaner"
+  gem 'selenium-webdriver'
 end
 
 group :production do
