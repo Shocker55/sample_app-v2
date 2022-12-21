@@ -25,6 +25,7 @@ RSpec.describe "Layouts", type: :system, js: true do
       end
 
       context "Account" do
+        # berore でまとめるとエラーになる
         # before do
         #   click_link "Account"
         # end
@@ -84,6 +85,23 @@ RSpec.describe "Layouts", type: :system, js: true do
     it "redirects contact when Contact is clicked" do
       click_link "お問い合わせ"
       expect(page.current_path).to eq contact_path
+    end
+  end
+
+  describe "#index" do
+    let!(:admin) { FactoryBot.create(:admin) }
+    let!(:not_admin) { FactoryBot.create(:archer) }
+
+    it 'adminユーザならdeleteリンクが表示されること' do
+      log_in_as admin
+      visit users_path
+      expect(page).to have_link 'delete'
+    end
+
+    it 'adminユーザでなければdeleteリンクが表示されないこと' do
+      log_in_as not_admin
+      visit users_path
+      expect(page).to_not have_link 'delete'
     end
   end
 end

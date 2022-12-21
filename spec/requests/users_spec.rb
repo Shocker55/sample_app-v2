@@ -55,8 +55,8 @@ RSpec.describe "Users", type: :request do
       expect(response).to redirect_to login_path
     end
 
-    describe 'pagination' do
-      let(:user) { FactoryBot.create(:user) }
+    describe "pagination" do
+      let(:user) { FactoryBot.create(:archer) }
       before do
         30.times do
           FactoryBot.create(:continuous_users)
@@ -115,6 +115,17 @@ RSpec.describe "Users", type: :request do
   describe "Patch /users" do
     let(:user) { FactoryBot.create(:user) }
 
+    it "is not allowed to be edited the admin attribute" do
+      log_in_as user = FactoryBot.create(:archer)
+      expect(user).to_not be_admin
+
+      patch user_path(user), params: { user: { password: "password",
+                                               password_confirmation: "pasword",
+                                               admin: true } }
+      user.reload
+      expect(user).to_not be_admin
+    end
+
     it "redirects update when not logged in" do
       patch user_path(user)
       expect(flash).to_not be_empty
@@ -124,7 +135,7 @@ RSpec.describe "Users", type: :request do
     context "wrong user" do
       let(:other_user) { FactoryBot.create(:archer) }
 
-      it "redirects edit whne logged in as wrong user" do
+      it "redirects edit when logged in as wrong user" do
         log_in_as other_user
         get edit_user_path(user)
         patch user_path(user), params: { user: { name: user.name,
@@ -183,6 +194,47 @@ RSpec.describe "Users", type: :request do
 
       it "show a flash" do
         expect(flash).to be_any
+      end
+    end
+  end
+
+  describe "DELETE /users/{id}" do
+    let!(:admin) { FactoryBot.create(:admin) }
+    let!(:other_user) { FactoryBot.create(:archer) }
+
+    context "logged in as admin" do
+      it "is able to delete" do
+        log_in_as(admin)
+        expect {
+          delete user_path(other_user)
+        }.to change(User, :count).by -1
+      end
+    end
+
+    context "not logged in" do
+      it "is not able to delete" do
+        expect {
+          delete user_path(admin)
+        }.to_not change(User, :count)
+      end
+
+      it "redirects to login" do
+        delete user_path(admin)
+        expect(response).to redirect_to login_path
+      end
+    end
+
+    context "not an admin user" do
+      it "is no able to delete" do
+        expect {
+          delete user_path(admin)
+        }.to_not change(User, :count)
+      end
+
+      it "redirects to root" do
+        log_in_as other_user
+        delete user_path(admin)
+        expect(response).to redirect_to root_path
       end
     end
   end
