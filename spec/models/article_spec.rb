@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Article, type: :model do
   let(:user) { FactoryBot.create(:user) }
-  let(:article) { Article.new(title: "Lorem", content: "Lorem ipsum", user_id: user.id) }
+  let(:article) { user.articles.build(title: "Lorem", content: "Lorem ipsum") }
 
   it "is valid" do
     expect(article).to be_valid
@@ -11,6 +11,19 @@ RSpec.describe Article, type: :model do
   it "is not invalid when id is nil" do
     article.user_id = nil
     expect(article).to_not be_valid
+  end
+
+  it "is right order which is most recent first" do
+    FactoryBot.send(:user_with_posts)
+    expect(FactoryBot.create(:most_recent)).to eq Article.first
+  end
+
+  it "removes user's articles when the user is destroy" do
+    post = FactoryBot.create(:most_recent)
+    user = post.user
+    expect {
+      user.destroy
+    }.to change(Article, :count).by -1
   end
 
   describe "title" do
