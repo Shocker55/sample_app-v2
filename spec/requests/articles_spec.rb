@@ -1,7 +1,56 @@
 require 'rails_helper'
 
 RSpec.describe "Articles", type: :request do
-  describe "GET /index" do
-    pending "add some examples (or delete) #{__FILE__}"
+  describe "#create" do
+    context "not logged in" do
+      it "is not able to create when not logged in" do
+        expect {
+          post articles_path, params: { article: { title: "Lorem", content: "Lorem ipsum" } }
+        }.to_not change(Article, :count)
+      end
+
+      it "redirect to login_path when not logged in" do
+        post articles_path, params: { article: { title: "Lorem", content: "Lorem ipsum" } }
+        expect(response).to redirect_to login_path
+      end
+    end
+  end
+
+  describe "#destroy" do
+    let(:user) { FactoryBot.create(:archer) }
+
+    before do
+      @post = FactoryBot.create(:most_recent)
+    end
+
+    context "not logged in" do
+      it "is not able to destroy when not logged in" do
+        expect {
+          delete article_path(@post)
+        }.to_not change(Article, :count)
+      end
+
+      it "redirect to login_path when not logged in" do
+        delete article_path(@post)
+        expect(response).to redirect_to login_path
+      end
+    end
+
+    # context "delete other user's post" do
+    #   before do
+    #     log_in_as user
+    #   end
+
+    #   it "is enable" do
+    #     expect {
+    #       delete article_path(@post)
+    #     }.to_not change(Article, :count)
+    #   end
+
+    #   it "redirect to login_path" do
+    #     delete article_path(@post)
+    #     expect(response).to redirect_to login_path
+    #   end
+    # end
   end
 end
