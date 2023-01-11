@@ -32,6 +32,7 @@ RSpec.describe "Articles", type: :request do
 
       it "redirect to login_path when not logged in" do
         delete article_path(@post)
+        expect(response).to have_http_status :see_other
         expect(response).to redirect_to login_path
       end
     end
@@ -47,10 +48,11 @@ RSpec.describe "Articles", type: :request do
         }.to_not change(Article, :count)
       end
 
-      # it "redirect to login_path" do
-      #   delete article_path(@post)
-      #   expect(response).to redirect_to login_path
-      # end
+      it "redirect to login_path" do
+        delete article_path(@post)
+        expect(response).to have_http_status :see_other
+        expect(response).to redirect_to root_url
+      end
     end
   end
 end
