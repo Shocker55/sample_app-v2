@@ -3,7 +3,10 @@ class StaticPagesController < ApplicationController
   end
 
   def home
-    @article = current_user.articles.build if logged_in?
+    if logged_in?
+      @article = current_user.articles.build
+      @feed_items = current_user.feed.page(params[:page]).per(30)
+    end
   end
 
   def help

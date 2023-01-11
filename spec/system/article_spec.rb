@@ -1,5 +1,5 @@
 require 'rails_helper'
- 
+
 RSpec.describe "Articles", type: :system do
   before do
     driven_by(:rack_test)
@@ -24,6 +24,13 @@ RSpec.describe "Articles", type: :system do
     it "ページネーションのラッパータグが表示されていること" do
       visit user_path @user
       expect(page).to have_selector "ul.pagination"
+    end
+
+    it "Articleのtitleがページ内に表示されていること" do
+      visit user_path @user
+      @user.articles.page(1).each do |article|
+        expect(page).to have_content article.title
+      end
     end
 
     it "Articleの本文がページ内に表示されていること" do

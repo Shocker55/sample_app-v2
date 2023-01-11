@@ -36,21 +36,21 @@ RSpec.describe "Articles", type: :request do
       end
     end
 
-    # context "delete other user's post" do
-    #   before do
-    #     log_in_as user
-    #   end
+    context "delete other user's post" do
+      before do
+        log_in_as user
+      end
 
-    #   it "is enable" do
-    #     expect {
-    #       delete article_path(@post)
-    #     }.to_not change(Article, :count)
-    #   end
+      it "is enable" do
+        expect {
+          delete article_path(@post)
+        }.to_not change(Article, :count)
+      end
 
-    #   it "redirect to login_path" do
-    #     delete article_path(@post)
-    #     expect(response).to redirect_to login_path
-    #   end
-    # end
+      # it "redirect to login_path" do
+      #   delete article_path(@post)
+      #   expect(response).to redirect_to login_path
+      # end
+    end
   end
 end
