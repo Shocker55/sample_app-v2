@@ -75,4 +75,22 @@ RSpec.describe User, type: :model do
       expect(user.authenticated?("")).to be_falsy
     end
   end
+
+  describe "#follow and #unfollow" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:other) { FactoryBot.create(:archer) }
+
+    it "turns true when follow a user" do
+      expect(user.following?(other)).to_not be_truthy
+      user.follow(other)
+      expect(user.following?(other)).to be_truthy
+    end
+
+    it "turns false when unfollow a user" do
+      user.follow(other)
+      expect(user.following?(other)).to_not be_falsey
+      user.unfollow(other)
+      expect(user.following?(other)).to be_falsey
+    end
+  end
 end
