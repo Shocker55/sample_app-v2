@@ -4,6 +4,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = current_user.articles.build(article_params)
+    @article.image.attach(params[:article][:image])
     if @article.save
       flash[:success] = "Article created!"
       redirect_to root_url
@@ -26,7 +27,7 @@ class ArticlesController < ApplicationController
   private
 
     def article_params
-      params.require(:article).permit(:content, :title)
+      params.require(:article).permit(:title, :content, :image)
     end
 
     def correct_user
