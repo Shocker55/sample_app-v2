@@ -12,6 +12,14 @@
   </head>
   <body>
     <%= render 'layouts/header-top' %>
+
+    <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <p>
+        <%= f.text_field :name %>
+        <%= f.submit :search %>
+    </p>
+    <% end %>
+
     <div class="container">
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>

@@ -20,6 +20,7 @@
       <%# </ul> %>
       <%# <ul class="nav navbar-nav navbar-right"> %>
         <% if logged_in? %>
+          <li><%= link_to "検索", search_path %>
           <li><%= link_to "My Dialy", '#',class: "" %></li>
           <li><%= link_to "Users", users_path %></li>
           <li class="dropdown">
