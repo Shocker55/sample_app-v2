@@ -11,9 +11,6 @@ module MyPlants
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     config.active_storage.variant_processor = :mini_magick
-
-     # 認証トークンをremoteフォームに埋め込む
-     config.action_view.embed_authenticity_token_in_remote_forms = true
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

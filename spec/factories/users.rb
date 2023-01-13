@@ -18,6 +18,13 @@ FactoryBot.define do
     password_confirmation { "foobar" }
   end
 
+  factory :lana, class: User do
+    name { "Sterling Lana" }
+    sequence(:email) { |n| "test#{n}@example.gov" }
+    password { "foobar" }
+    password_confirmation { "foobar" }
+  end
+
   factory :continuous_users, class: User do
     sequence(:name) { |n| "User #{n}" }
     sequence(:email) { |n| "user-#{n}@example.com" }

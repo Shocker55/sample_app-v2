@@ -93,4 +93,35 @@ RSpec.describe User, type: :model do
       expect(user.following?(other)).to be_falsey
     end
   end
+
+  describe "#feed" do
+    let(:posted_by_user) { FactoryBot.create(:post_by_user) }
+    let(:posted_by_lana) { FactoryBot.create(:post_by_lana) }
+    let(:posted_by_archer) { FactoryBot.create(:post_by_archer) }
+    let(:user) { posted_by_user.user }
+    let(:lana) { posted_by_lana.user }
+    let(:archer) { posted_by_archer.user }
+
+    before do
+      user.follow(lana)
+    end
+
+    it "displays posts from followed users" do
+      lana.articles.each do |post_following|
+        expect(user.feed.include?(post_following)).to be_truthy
+      end
+    end
+
+    it "displays own posts" do
+      user.articles.each do |post_self|
+        expect(user.feed.include?(post_self)).to be_truthy
+      end
+    end
+
+    it "doesn't display posts form not following users" do
+      archer.articles.each do |post_unfollowed|
+        expect(user.feed.include?(post_unfollowed)).to be_falsey
+      end
+    end
+  end
 end
