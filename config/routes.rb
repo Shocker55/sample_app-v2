@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'article_likes/create'
+  get 'article_likes/destroy'
   get 'sessions/new'
   get 'users/new'
   root "static_pages#home"
@@ -19,4 +21,5 @@ Rails.application.routes.draw do
   resources :articles,    only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
   get '/articles', to: 'static_pages#home'
+  resources :article_likes, only: [:create, :destroy]
 end
