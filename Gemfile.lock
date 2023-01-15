@@ -77,7 +77,7 @@ GEM
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.695.0)
+    aws-partitions (1.696.0)
     aws-sdk-core (3.169.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -132,7 +132,7 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faker (2.21.0)
+    faker (3.1.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     globalid (1.0.1)
@@ -206,7 +206,7 @@ GEM
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
     public_suffix (5.0.1)
-    puma (5.6.4)
+    puma (6.0.2)
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.6.2)
@@ -240,7 +240,7 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.0.6)
-    regexp_parser (2.6.1)
+    regexp_parser (2.6.2)
     rexml (3.2.5)
     rspec-core (3.12.0)
       rspec-support (~> 3.12.0)
@@ -336,28 +336,28 @@ DEPENDENCIES
   bootsnap (= 1.12.0)
   bootstrap-sass (= 3.4.1)
   byebug
-  capybara
-  database_cleaner
-  dotenv-rails
-  factory_bot_rails
-  faker (= 2.21.0)
+  capybara (~> 3.38)
+  database_cleaner (~> 2.0)
+  dotenv-rails (~> 2.8)
+  factory_bot_rails (~> 6.2)
+  faker (~> 3.1.0)
   image_processing (= 1.12.2)
   importmap-rails (= 1.1.0)
-  jbuilder (= 2.11.5)
-  kaminari
-  kaminari-i18n
+  jbuilder (~> 2.11)
+  kaminari (~> 1.2)
+  kaminari-i18n (~> 0.5)
   mysql2 (~> 0.5)
   pre-commit
   pry-byebug (~> 3.9)
-  puma (= 5.6.4)
+  puma (~> 6.0)
   rails (~> 7.0.4.1)
-  rspec-rails
-  rubocop
-  rubocop-rails
+  rspec-rails (~> 6.0)
+  rubocop (~> 1.43)
+  rubocop-rails (~> 2.17)
   sassc-rails (= 2.1.2)
-  selenium-webdriver
+  selenium-webdriver (~> 4.7)
   spring
-  spring-commands-rspec
+  spring-commands-rspec (~> 1.0)
   sprockets-rails (= 3.4.2)
   stimulus-rails (= 1.0.4)
   turbo-rails (= 1.1.1)
