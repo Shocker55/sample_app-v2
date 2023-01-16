@@ -18,3 +18,26 @@ def user_with_posts(posts_count: 5)
     FactoryBot.create_list(:orange, posts_count, user: user)
   end
 end
+
+FactoryBot.define do
+  factory :post_by_user, class: Article do
+    title {"User"}
+    content {"Posted by User"}
+    created_at { Time.zone.now }
+    user
+  end
+
+  factory :post_by_archer, class: Article do
+    title {"Archer"}
+    content {"Posted by Archer"}
+    created_at { Time.zone.now }
+    user factory: :archer
+  end
+
+  factory :post_by_lana, class: Article do
+    title {"Lana"}
+    content {"Posted by Lana"}
+    created_at { Time.zone.now }
+    user factory: :lana
+  end
+end
