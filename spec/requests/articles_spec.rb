@@ -1,6 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe "Articles", type: :request do
+  describe "GET #new" do
+    let(:user) { FactoryBot.create(:user) }
+
+    before do
+      log_in_as user
+    end
+
+    it "returns http success" do
+      get '/articles/new'
+      expect(response).to have_http_status(:success)
+    end
+  end
+
   describe "#create" do
     context "not logged in" do
       it "is not able to create when not logged in" do

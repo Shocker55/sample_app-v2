@@ -63,6 +63,7 @@ RSpec.describe "Articles", type: :system do
       visit current_path
       expect(page).to have_content "0 articles"
 
+      visit '/articles/new'
       fill_in "article_title", with: "Article Title"
       fill_in "article_content", with: "This article really ties the room together"
       click_button "Post"
@@ -82,6 +83,7 @@ RSpec.describe "Articles", type: :system do
 
     context "valid submission" do
       it "is able to post" do
+        visit '/articles/new'
         expect {
           fill_in "article_title", with: "Article Title"
           fill_in "article_content", with: "This article really ties the room together"
@@ -95,6 +97,7 @@ RSpec.describe "Articles", type: :system do
 
     context "invalid submission" do
       it "is inable to post" do
+        visit '/articles/new'
         fill_in "article_title", with: ''
         fill_in "article_content", with: ''
         click_button "Post"
@@ -109,6 +112,7 @@ RSpec.describe "Articles", type: :system do
       end
 
       it "is able to delete own article" do
+        visit '/articles/new'
         fill_in "article_title", with: "Article Title"
         fill_in "article_content", with: "This article really ties the room together"
         click_button "Post"

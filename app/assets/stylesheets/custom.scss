@@ -5,6 +5,7 @@
 
 $gray-medium-light: #eaeaea;
 
+/* CSSルールをグループ化してパッケージにまとめ、さまざまな要素で使える */
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
   -webkit-box-sizing: border-box;
@@ -242,6 +243,14 @@ input, textarea, select, .unditable-input {
 
 input {
   height: auto !important;
+}
+
+textarea#article_title {
+  height: 25px;
+}
+
+textarea#article_content{
+  height: 400px;
 }
 
 #error_explanation {

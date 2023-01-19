@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  resources :articles,    only: [:create, :destroy]
+  resources :articles,    only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
-  get '/microposts', to: 'static_pages#home'
+  get '/articles', to: 'static_pages#home'
 end
