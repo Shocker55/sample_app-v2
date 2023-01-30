@@ -2,7 +2,8 @@ require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  # device
+  config.action_mailer.default_url_options = { host: 'https://peaceful-woodland-12706.herokuapp.com/', port: 80 }
   # Code is not reloaded between requests.
   config.cache_classes = true
 

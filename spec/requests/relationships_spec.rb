@@ -6,7 +6,7 @@ RSpec.describe "Relationships", type: :request do
 
   describe "#create" do
     it "increase a relationship" do
-      log_in_as user
+      sign_in(user)
       expect {
         post relationships_path, params: { followed_id: other.id }
       }.to change(Relationship, :count).by 1
@@ -15,7 +15,7 @@ RSpec.describe "Relationships", type: :request do
     context "not logged in" do
       it "redirects to login_path" do
         post relationships_path
-        expect(response).to redirect_to login_url
+        expect(response).to redirect_to new_user_session_path
       end
 
       it "is not able to create" do
@@ -28,7 +28,7 @@ RSpec.describe "Relationships", type: :request do
 
   describe "#destroy" do
     it "decrase a relationship" do
-      log_in_as user
+      sign_in(user)
       user.follow(other)
       relationship = user.active_relationships.find_by(followed_id: other.id)
       expect {

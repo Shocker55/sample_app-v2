@@ -5,7 +5,7 @@ RSpec.describe "Articles", type: :request do
     let(:user) { FactoryBot.create(:user) }
 
     before do
-      log_in_as user
+      sign_in(user)
     end
 
     it "returns http success" do
@@ -24,7 +24,7 @@ RSpec.describe "Articles", type: :request do
 
       it "redirect to login_path when not logged in" do
         post articles_path, params: { article: { title: "Lorem", content: "Lorem ipsum" } }
-        expect(response).to redirect_to login_path
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
@@ -45,14 +45,13 @@ RSpec.describe "Articles", type: :request do
 
       it "redirect to login_path when not logged in" do
         delete article_path(@post)
-        expect(response).to have_http_status :see_other
-        expect(response).to redirect_to login_path
+        expect(response).to redirect_to new_user_session_path
       end
     end
 
     context "delete other user's post" do
       before do
-        log_in_as user
+        sign_in(user)
       end
 
       it "is enable" do

@@ -1,5 +1,5 @@
 class ArticleLikesController < ApplicationController
-  before_action :logged_in_user
+  before_action :authenticate_user!
 
   def create
     @article = Article.find(params[:article_id])

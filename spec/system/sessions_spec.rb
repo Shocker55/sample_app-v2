@@ -8,13 +8,11 @@ RSpec.describe "Sessions", type: :system do
   describe "#new" do
     context "login with invalid information" do
       it "shows a flash message" do
-        visit login_path
-        fill_in "Email", with: ""
-        fill_in "Password", with: ""
-        click_button "Log in"
-        expect(page).to have_selector "div.alert.alert-danger"
-        visit root_path
-        expect(page).to_not have_selector "div.alert.alert-danger"
+        visit new_user_session_path
+        fill_in "Eメール", with: ""
+        fill_in "パスワード", with: ""
+        click_button "ログイン"
+        expect(page).to have_selector "p.alert"
       end
     end
 
@@ -22,12 +20,12 @@ RSpec.describe "Sessions", type: :system do
       let(:user) { FactoryBot.create(:user) }
 
       it "shows users page" do
-        visit login_path
-        fill_in "Email", with: user.email
-        fill_in "Password", with: user.password
-        click_button "Log in"
-        expect(page).to_not have_selector "a[href=\"#{login_path}\"]"
-        expect(page).to have_selector "a[href=\"#{logout_path}\"]"
+        visit new_user_session_path
+        fill_in "Eメール", with: user.email
+        fill_in "パスワード", with: user.password
+        click_button "ログイン"
+        expect(page).to_not have_selector "a[href=\"#{new_user_session_path}\"]"
+        expect(page).to have_selector "a[href=\"#{destroy_user_session_path}\"]"
         expect(page).to have_selector "a[href=\"#{user_path(user)}\"]"
       end
     end

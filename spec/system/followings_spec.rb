@@ -4,7 +4,7 @@ RSpec.describe "Followings", type: :system do
   before do
     driven_by(:rack_test)
     @user = FactoryBot.send(:create_relationships)
-    log_in_as @user
+    sign_in(@user)
   end
 
   describe "following page" do
