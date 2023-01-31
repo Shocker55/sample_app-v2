@@ -31,13 +31,13 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  #sign_inヘルパーを提供してくれます
+  # sign_inヘルパーを提供してくれます
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :system
 
-  config.include FactoryBot::Syntax::Methods 
+  config.include FactoryBot::Syntax::Methods
 
   config.before(:each, type: :system) do
     driven_by :rack_test

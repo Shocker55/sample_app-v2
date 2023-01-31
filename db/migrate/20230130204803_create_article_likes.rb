@@ -8,7 +8,7 @@ class CreateArticleLikes < ActiveRecord::Migration[7.0]
 
       t.index :user_id
       t.index :article_id
-      t.index [:user_id, :article_id], unique: true
+      t.index %i[user_id article_id], unique: true
     end
   end
 end

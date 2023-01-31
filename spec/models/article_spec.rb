@@ -23,7 +23,7 @@ RSpec.describe Article, type: :model do
     user = post.user
     expect {
       user.destroy
-    }.to change(Article, :count).by -1
+    }.to change(Article, :count).by(-1)
   end
 
   describe "title" do

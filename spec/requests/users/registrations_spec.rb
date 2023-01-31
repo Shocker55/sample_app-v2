@@ -8,7 +8,6 @@ RSpec.describe "User Registration", type: :request do
     end
   end
 
-
   describe "GET edit_user_registration_path" do
     let(:user) { FactoryBot.create(:user) }
 
@@ -45,7 +44,6 @@ RSpec.describe "User Registration", type: :request do
 
     it "redirect to users/show" do
       post user_registration_path, params: user_params
-      user = User.last
       expect(response).to redirect_to root_url
     end
 

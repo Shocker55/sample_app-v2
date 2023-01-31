@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Settings", type: :system do
-
   describe "profile settings" do
     let(:user) { FactoryBot.create(:user) }
 

@@ -69,16 +69,16 @@ RSpec.describe "Articles", type: :system do
       expect(page).to have_content "1 article"
     end
 
-#     # it '画像添付ができること' do
-#     #   expect {
-#     #     fill_in "article_title", with: "Article Title"
-#     #     fill_in "article_content", with: "This article really ties the room together"
-#     #     attach_file "article[image]", "#{Rails.root}/spec/files/kitten.jpg"
-#     #     click_button "Post"
-#     #   }.to change(Article, :count).by 1
-#     #   attached_post = Article.first
-#     #   expect(attached_post.image).to be_attached
-#     # end
+    #     # it '画像添付ができること' do
+    #     #   expect {
+    #     #     fill_in "article_title", with: "Article Title"
+    #     #     fill_in "article_content", with: "This article really ties the room together"
+    #     #     attach_file "article[image]", "#{Rails.root}/spec/files/kitten.jpg"
+    #     #     click_button "Post"
+    #     #   }.to change(Article, :count).by 1
+    #     #   attached_post = Article.first
+    #     #   expect(attached_post.image).to be_attached
+    #     # end
 
     context "valid submission" do
       it "is able to post" do
@@ -120,7 +120,7 @@ RSpec.describe "Articles", type: :system do
 
         expect {
           click_link "delete", href: article_path(post)
-        }.to change(Article, :count).by -1
+        }.to change(Article, :count).by(-1)
         expect(page).to_not have_content "Article Title"
         expect(page).to_not have_content "This article really ties the room together"
       end

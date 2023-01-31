@@ -6,10 +6,10 @@ class ArticleLikesController < ApplicationController
     unless @article.iine?(current_user)
       @article.iine(current_user)
       respond_to do |format|
-        format.html { redirect_to request.referrer || root_url }
+        format.html { redirect_to request.referer || root_url }
         format.js
       end
-      end
+    end
   end
 
   def destroy
@@ -17,7 +17,7 @@ class ArticleLikesController < ApplicationController
     if @article.iine?(current_user)
       @article.uniine(current_user)
       respond_to do |format|
-        format.html { redirect_to request.referrer || root_url , status: :see_other}
+        format.html { redirect_to request.referer || root_url, status: :see_other }
         format.js
       end
     end

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-
   describe "Get /users" do
     it "redirects index when not logged in" do
       get users_path
@@ -47,7 +46,7 @@ RSpec.describe "Users", type: :request do
     let(:other_user) { FactoryBot.create(:archer) }
 
     it "is not allowed to be edited the admin attribute" do
-      sign_in(other_user) 
+      sign_in(other_user)
       expect(other_user).to_not be_admin
 
       patch user_registration_path, params: { user: { password: "password",

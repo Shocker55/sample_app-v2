@@ -48,6 +48,48 @@ Style/RedundantSelf:
 Style/StringLiterals:
   Enabled: false
 
+Style/BlockComments:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/models/article_spec.rb'
+    - 'spec/models/relationship_spec.rb'
+    - 'spec/requests/articles_spec.rb'
+    - 'spec/requests/relationships_spec.rb'
+    - 'spec/requests/users/registrations_spec.rb'
+    - 'spec/system/articles_spec.rb'
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'app/controllers/users/confirmations_controller.rb'
+    - 'app/controllers/users/omniauth_callbacks_controller.rb'
+    - 'app/controllers/users/passwords_controller.rb'
+    - 'app/controllers/users/registrations_controller.rb'
+    - 'app/controllers/users/sessions_controller.rb'
+    - 'app/controllers/users/unlocks_controller.rb'
+    - 'test/channels/application_cable/connection_test.rb'
+    - 'test/test_helper.rb'
+
+# 変数の比較と代入は、条件式の戻り値を使う
+Style/ConditionalAssignment:
+  Exclude:
+    - 'app/controllers/searchs_controller.rb'
+
+# 条件分岐のネストを深くすしないための技法
+Style/GuardClause:
+  Exclude:
+    - 'app/controllers/article_likes_controller.rb'
+    - 'app/controllers/static_pages_controller.rb'
+
+Style/GlobalStdStream:
+  Exclude:
+    - 'config/environments/production.rb'
+
+Style/RedundantFetchBlock:
+  Exclude:
+    - 'config/puma.rb'
 ##################### Lint ##################################
 
 ##################### Metrics ##################################
@@ -71,3 +113,65 @@ Metrics/MethodLength:
   Max: 20
   Exclude:
     - "db/migrate/*.rb"
+
+Metrics/BlockLength:
+  Max: 100
+##################### Layout ##################################
+Layout/ArgumentAlignment:
+  Exclude:
+    - 'db/seeds.rb'
+    - 'spec/models/relationship_spec.rb'
+
+Layout/BlockEndNewline:
+  Exclude:
+    - 'spec/models/relationship_spec.rb'
+    - 'spec/requests/users/registrations_spec.rb'
+
+Layout/HashAlignment:
+  Exclude:
+    - 'app/models/article.rb'
+    - 'app/models/user.rb'
+    - 'db/seeds.rb'
+    - 'spec/models/relationship_spec.rb'
+    - 'spec/requests/users/registrations_spec.rb'
+    - 'spec/requests/users_spec.rb'
+
+Layout/IndentationConsistency:
+  Exclude:
+    - 'app/controllers/articles_controller.rb'
+    - 'db/migrate/20230130151225_create_active_storage_tables.active_storage.rb'
+
+Layout/IndentationWidth:
+  Exclude:
+    - 'app/controllers/articles_controller.rb'
+    - 'db/migrate/20230130151225_create_active_storage_tables.active_storage.rb'
+    - 'spec/requests/relationships_spec.rb'
+
+Layout/MultilineBlockLayout:
+  Exclude:
+    - 'spec/models/relationship_spec.rb'
+    - 'spec/requests/users/registrations_spec.rb'
+
+Layout/MultilineMethodCallIndentation:
+  Exclude:
+    - 'app/models/user.rb'
+
+##################### Naming ##################################
+Naming/RescuedExceptionsVariableName:
+  Exclude:
+    - 'app/controllers/turbo_devise_controller.rb'
+
+##################### Rails ##################################
+# migarationでadd_indexをすると指摘される
+Rails/BulkChangeTable:
+  Exclude:
+    - 'db/migrate/20230123010632_devise_create_users.rb'
+    - 'db/migrate/20230130154909_create_relationships.rb'
+
+Rails/FilePath:
+  Exclude:
+    - 'spec/rails_helper.rb'
+
+Rails/InverseOf:
+  Exclude:
+    - 'app/models/user.rb'

@@ -6,15 +6,17 @@ class SearchsController < ApplicationController
   end
 
   private
-  def search_for(model, content)
-    if model == 'user'
-      if params["content"].present?
+
+  def search_for(model, _content)
+    case model
+    when 'user'
+      if params[:content].present?
         @users = User.where('name LIKE ?', "%#{params[:content]}%")
       else
         @users = User.none
       end
-    elsif model == 'article'
-      if params["content"].present?
+    when 'article'
+      if params[:content].present?
         @articles = Article.where('title LIKE ?', "%#{params[:content]}%")
       else
         @articles = Article.none

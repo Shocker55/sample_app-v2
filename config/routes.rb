@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users, only: [:show, :index]
+  resources :users, only: %i[show index]
   get 'article_likes/create'
   get 'article_likes/destroy'
   root 'static_pages#home'
@@ -14,8 +14,8 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  resources :articles,    only: [:new, :create, :destroy]
-  resources :relationships, only: [:create, :destroy]
+  resources :articles, only: %i[new create destroy]
+  resources :relationships, only: %i[create destroy]
   get '/articles', to: 'static_pages#home'
-  resources :article_likes, only: [:create, :destroy]
+  resources :article_likes, only: %i[create destroy]
 end

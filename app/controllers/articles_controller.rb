@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :destroy]
-  before_action :correct_user,   only: :destroy
+  before_action :authenticate_user!, only: %i[new create destroy]
+  before_action :correct_user, only: :destroy
 
   def new
     @article = current_user.articles.build
@@ -20,10 +20,10 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     flash[:success] = "Article deleted"
-    if request.referrer.nil?
+    if request.referer.nil?
       redirect_to root_url, status: :see_other
     else
-      redirect_to request.referrer, status: :see_other
+      redirect_to request.referer, status: :see_other
     end
   end
 
@@ -34,8 +34,7 @@ class ArticlesController < ApplicationController
     end
 
     def correct_user
-        @article = current_user.articles.find_by(id: params[:id])
-        redirect_to root_url, status: :see_other if @article.nil?
+      @article = current_user.articles.find_by(id: params[:id])
+      redirect_to root_url, status: :see_other if @article.nil?
     end
 end
-

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Relationships", type: :request do
-    let(:user) { FactoryBot.create(:user) }
-    let(:other) { FactoryBot.create(:archer) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:other) { FactoryBot.create(:archer) }
 
   describe "#create" do
     it "increase a relationship" do
@@ -33,7 +33,7 @@ RSpec.describe "Relationships", type: :request do
       relationship = user.active_relationships.find_by(followed_id: other.id)
       expect {
         delete relationship_path(relationship)
-      }.to change(Relationship, :count).by -1
+      }.to change(Relationship, :count).by(-1)
     end
   end
 end

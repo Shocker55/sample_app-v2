@@ -9,7 +9,7 @@ RSpec.describe "StaticPages", type: :system do
     it 'root_pathへのリンク、help, about, contactへのリンクが表示されていること' do
       visit root_path
       link_to_root = page.find_all("a[href=\"#{root_path}\"]")
- 
+
       expect(link_to_root.size).to eq 1
       expect(page).to have_link 'About', href: about_path
       expect(page).to have_link "お問い合わせ", href: contact_path

@@ -1,16 +1,16 @@
-require 'rails_helper'
+# require 'rails_helper'
 
 # RSpec.describe "Layouts", type: :system, js: true do
-#   # before do
-#   #   driven_by(:selenium_chrome)
-#   # end
+#   before do
+#     driven_by(:selenium_chrome)
+#   end
 
 #   let(:user) { FactoryBot.create(:user) }
 
 #   describe "header" do
 #     context "loging in" do
 #       before do
-#         log_in_as user
+#         sign_in(user)
 #         visit root_path
 #       end
 
