@@ -42,7 +42,7 @@ RSpec.describe User, type: :model do
     invalid_addresses.each do |invalid_address|
       user.email = invalid_address
       user.valid?
-      expect(user.errors[:email]).to include("is invalid")
+      expect(user.errors[:email]).to include("は不正な値です")
     end
   end
 
@@ -70,12 +70,6 @@ RSpec.describe User, type: :model do
     expect expect(user).to_not be_valid
   end
 
-  describe "#authenticated?" do
-    it "returns false if the digest is nil" do
-      expect(user.authenticated?("")).to be_falsy
-    end
-  end
-
   describe "#follow and #unfollow" do
     let(:user) { FactoryBot.create(:user) }
     let(:other) { FactoryBot.create(:archer) }
@@ -83,6 +77,7 @@ RSpec.describe User, type: :model do
     it "turns true when follow a user" do
       expect(user.following?(other)).to_not be_truthy
       user.follow(other)
+      expect(other.followers.include?(user)).to be_truthy
       expect(user.following?(other)).to be_truthy
     end
 

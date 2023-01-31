@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :destroy]
   before_action :correct_user,   only: :destroy
 
   def new

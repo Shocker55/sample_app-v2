@@ -8,12 +8,12 @@ RSpec.feature "UsersSignups", type: :system do
   describe "#create" do
     context "invalid signup information" do
       it "shows error explanations" do
-        visit signup_path
+        visit new_user_registration_path
         fill_in "Name", with: ""
-        fill_in "Email", with: "user@invlid"
-        fill_in "Password", with: "foo"
-        fill_in "Password confirmation", with: "bar"
-        click_button "Create my account"
+        fill_in "Eメール", with: "user@invlid"
+        fill_in "パスワード", with: "foo"
+        fill_in "パスワード（確認用）", with: "bar"
+        click_button "アカウント登録"
 
         expect(page).to have_selector "div#error_explanation"
         expect(page).to have_selector "div.field_with_errors"

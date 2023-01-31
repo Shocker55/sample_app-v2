@@ -15,6 +15,9 @@ gem 'puma',                       '~> 6.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.11'
 
+# Use devise for Users and authentication.
+gem 'devise', '~> 4.8'
+gem 'devise-i18n'
 gem 'dotenv-rails', '~> 2.8'
 
 gem 'bcrypt',                     '3.1.18'
@@ -38,6 +41,10 @@ gem 'kaminari-i18n', '~> 0.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+
+ # Pry for debugging.
+  gem 'pry', '~> 0.14'
+  gem 'pry-rails', '~> 0.3'
 
   # Rspec
   gem 'factory_bot_rails', '~> 6.2'

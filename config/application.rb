@@ -22,6 +22,6 @@ module MyPlants
     # config.eager_load_paths << Rails.root.join("extras")
 
     # # Set Pagenate default Language is Japanese
-    # config.i18n.default_locale = :ja
+    config.i18n.default_locale = :ja
   end
 end

@@ -12,8 +12,7 @@ RSpec.describe "Articles", type: :system do
     end
 
     it "shows 30 articles" do
-      visit user_path @user
-
+      visit user_path(@user)
       posts_wrapper =
         within "ol.articles" do
           find_all("li")
@@ -22,7 +21,7 @@ RSpec.describe "Articles", type: :system do
     end
 
     it "has paginate articles" do
-      visit user_path @user
+      visit user_path(@user)
       expect(page).to have_selector "ul.pagination"
     end
 
@@ -45,8 +44,8 @@ RSpec.describe "Articles", type: :system do
     before do
       FactoryBot.send(:user_with_posts, posts_count: 35)
       @user = Article.first.user
-      @user.password = "password"
-      log_in_as @user
+      # @user.password = "password"
+      sign_in(@user)
       visit root_url
     end
 
@@ -70,16 +69,16 @@ RSpec.describe "Articles", type: :system do
       expect(page).to have_content "1 article"
     end
 
-    # it '画像添付ができること' do
-    #   expect {
-    #     fill_in "article_title", with: "Article Title"
-    #     fill_in "article_content", with: "This article really ties the room together"
-    #     attach_file "article[image]", "#{Rails.root}/spec/files/kitten.jpg"
-    #     click_button "Post"
-    #   }.to change(Article, :count).by 1
-    #   attached_post = Article.first
-    #   expect(attached_post.image).to be_attached
-    # end
+#     # it '画像添付ができること' do
+#     #   expect {
+#     #     fill_in "article_title", with: "Article Title"
+#     #     fill_in "article_content", with: "This article really ties the room together"
+#     #     attach_file "article[image]", "#{Rails.root}/spec/files/kitten.jpg"
+#     #     click_button "Post"
+#     #   }.to change(Article, :count).by 1
+#     #   attached_post = Article.first
+#     #   expect(attached_post.image).to be_attached
+#     # end
 
     context "valid submission" do
       it "is able to post" do
