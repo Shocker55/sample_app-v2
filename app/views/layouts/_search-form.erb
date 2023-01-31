@@ -1,8 +1,0 @@
-<form class="search-form">
-  <div class="form-group">
-    <%= form_with url: search_path, method: :get, local: true do |f| %>
-        <%= f.text_field :name %>
-        <%= f.submit :search %>
-    <% end %>
-  </div>
-</form>

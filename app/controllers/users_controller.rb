@@ -23,12 +23,4 @@ class UsersController < ApplicationController
     @users = @user.followers.page(params[:page]).per(30)
     render 'show_follow', status: :unprocessable_entity
   end
-
-  def search
-    if params[:name].present?
-      @users = User.where('name LIKE ?', "%#{params[:name]}%")
-    else
-      @users = User.none
-    end
-  end
 end

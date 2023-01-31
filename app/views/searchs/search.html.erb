@@ -1,0 +1,38 @@
+<% if @model == 'user' %>
+  <h3>【Usersモデルの検索結果】検索ワード：<%= @content %></h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% if @model == 'articles' %>
+  <h3>【Articleモデルの検索結果】検索ワード：<%= @content %></h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Article</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @articles.each do |article| %>
+        <tr>
+          <td><%= article.title %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% else %>
+  <%= render 'searchs/form' %>
+<% end %>
