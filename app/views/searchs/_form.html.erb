@@ -1,0 +1,9 @@
+<form class="search-form">
+  <div class="form-group">
+      <%= form_tag(search_path, method: :get) do %>
+            <%= text_field_tag 'content' %>
+            <%= select_tag 'model', options_for_select({ "User" => "user", "Article" => "article" }) %>
+            <%= submit_tag '検索' %>
+      <% end %>
+  </div>
+</form>
