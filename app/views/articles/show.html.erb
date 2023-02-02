@@ -21,6 +21,14 @@
   <% end %>
 
 <h2>コメント一覧</h2>
+  <span>
   <% @comments.each do |comment| %>
+    <%= comment.user.name %>
     <%= comment.comment_content %>
-  <%end%>
+    Commented <%= time_ago_in_words(comment.created_at) %>前
+     <% if current_user === comment.user %>
+      <%= link_to "delete", article_comment_path(comment.article, comment), data: { "turbo-method": :delete,
+                                                turbo_confirm: "You sure?" } %>
+    <% end %>
+  <% end %>
+  </span>

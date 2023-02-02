@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
   resources :articles, only: %i[new show create destroy]
   resources :articles do
-    resources :comments, only: [:create]
+    resources :comments, only: %i[create destroy]
   end
   resources :relationships, only: %i[create destroy]
   get '/articles', to: 'static_pages#home'
