@@ -1,9 +1,20 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create destroy]
+  before_action :authenticate_user!, only: %i[new show create destroy]
   before_action :correct_user, only: :destroy
 
   def new
     @article = current_user.articles.build
+  end
+
+  # def index
+  #   @articles = current_user.articles.all
+  #   @article = current_user.articles.new
+  # end
+
+  def show
+    @article = Article.find(params[:id])
+    @comments = @article.comments
+    @comment = current_user.comments.new
   end
 
   def create
