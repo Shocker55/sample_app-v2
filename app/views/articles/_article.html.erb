@@ -1,7 +1,9 @@
 <li id="article-<%= article.id %>">
   <%= link_to gravatar_for(article.user, size: 50), article.user %>
   <span class="user"><%= link_to article.user.name, article.user %></span>
-  <span class="article-title"><%= article.title%></span>
+  <%= link_to article_path(article.id) do %>
+    <span class="article-title"><%= article.title%></span>
+  <% end %>
   <span class="content">
     <%= article.content%>
     <% if article.image.attached? %>

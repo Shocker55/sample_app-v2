@@ -1,0 +1,26 @@
+<h2>投稿詳細</h2>
+  <span class="article-title"><%= @article.title%></span>
+  <span class="content">
+    <%= @article.content%>
+    <% if @article.image.attached? %>
+      <%= image_tag article.image.variant(:display) %>
+    <% end %>
+  </span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(@article.created_at) %> ago.
+    <% if current_user === @article.user %>
+      <%= link_to "delete", @article, data: { "turbo-method": :delete,
+                                                turbo_confirm: "You sure?" } %>
+    <% end %>
+  </span>
+<h2>コメントをする</h2>
+  <%=  form_with(model:[@article, @comment], method: :post) do |f| %>
+    <%= f.text_area :comment_content %>
+    <%= f.hidden_field :article_id, value: @article.id %>
+    <%= f.submit 'コメントする' %>
+  <% end %>
+
+<h2>コメント一覧</h2>
+  <% @comments.each do |comment| %>
+    <%= comment.comment_content %>
+  <%end%>

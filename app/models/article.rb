@@ -5,6 +5,7 @@ class Article < ApplicationRecord
   end
   has_many :article_likes, dependent: :destroy
   has_many :iine_users, through: :article_likes, source: :user
+  has_many :comments, dependent: :destroy
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
   validates :title,   presence: true, length: { maximum: 50 }
