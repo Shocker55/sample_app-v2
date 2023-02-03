@@ -13,22 +13,28 @@
                                                 turbo_confirm: "You sure?" } %>
     <% end %>
   </span>
-<h2>コメントをする</h2>
-  <%=  form_with(model:[@article, @comment], method: :post) do |f| %>
-    <%= f.text_area :comment_content %>
-    <%= f.hidden_field :article_id, value: @article.id %>
-    <%= f.submit 'コメントする' %>
-  <% end %>
-
-<h2>コメント一覧</h2>
-  <span>
-  <% @comments.each do |comment| %>
-    <%= comment.user.name %>
-    <%= comment.comment_content %>
-    Commented <%= time_ago_in_words(comment.created_at) %>前
-     <% if current_user === comment.user %>
-      <%= link_to "delete", article_comment_path(comment.article, comment), data: { "turbo-method": :delete,
-                                                turbo_confirm: "You sure?" } %>
+<div class="comments">
+  <h2>コメントをする</h2>
+    <%=  form_with(model:[@article, @comment], method: :post) do |f| %>
+      <%= f.text_area :comment_content %>
+      <%= f.hidden_field :article_id, value: @article.id %>
+      <%= f.submit 'コメントする' %>
     <% end %>
-  <% end %>
-  </span>
+
+  <h2>コメント一覧</h2>
+    <span>
+    <% @comments.each do |comment| %>
+    <div class="comments-index">
+      <%= comment.user.name %>
+      <%= comment.comment_content %><br>
+      Commented <%= time_ago_in_words(comment.created_at) %>前
+      <% if current_user === comment.user %>
+      <div class="comment-delete">
+        <%= link_to "delete", article_comment_path(comment.article, comment), data: { "turbo-method": :delete,
+                                                  turbo_confirm: "You sure?" } %>
+      </div>
+    </div>
+      <% end %>
+    <% end %>
+    </span>
+</div>
