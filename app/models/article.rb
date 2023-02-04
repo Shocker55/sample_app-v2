@@ -7,6 +7,8 @@ class Article < ApplicationRecord
   has_many :iine_users, through: :article_likes, source: :user
   has_many :comments, dependent: :destroy
   has_many :comment_users, through: :comments, source: :user
+  has_many :article_relationships, dependent: :destroy
+  has_many :tags, through: :article_relationships
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
   validates :title,   presence: true, length: { maximum: 50 }
@@ -28,5 +30,12 @@ class Article < ApplicationRecord
   # 現在のユーザーがいいねしてたらtrueを返す
   def iine?(user)
     iine_users.include?(user)
+  end
+
+  def save_tags(savearticle_tags)
+    savearticle_tags.each do |new_name|
+      article_tag = Tag.find_or_create_by(name: new_name)
+      self.tags << article_tag
+    end
   end
 end

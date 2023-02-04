@@ -19,8 +19,10 @@ class ArticlesController < ApplicationController
 
   def create
     @article = current_user.articles.build(article_params)
+    tag_list = params[:article][:tag_ids].split(',')
     @article.image.attach(params[:article][:image])
     if @article.save
+      @article.save_tags(tag_list)
       flash[:success] = "Article created!"
       redirect_to root_url
     else
