@@ -5,16 +5,12 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.new(comment_params)
     @comment.save
-    redirect_back(fallback_location: root_path)
+    redirect_to request.referer || root_url
   end
 
   def destroy
     @comment.destroy
-    if request.referer.nil?
-      redirect_to root_url, status: :see_other
-    else
-      redirect_to request.referer, status: :see_other
-    end
+    redirect_to request.referer || root_url, status: :see_other
   end
 
   private
