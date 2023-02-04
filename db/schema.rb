@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_02_111645) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_04_111013) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,6 +49,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_02_111645) do
     t.index ["user_id"], name: "index_article_likes_on_user_id"
   end
 
+  create_table "article_relationships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "article_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id", "tag_id"], name: "index_article_relationships_on_article_id_and_tag_id", unique: true
+    t.index ["article_id"], name: "index_article_relationships_on_article_id"
+    t.index ["tag_id"], name: "index_article_relationships_on_tag_id"
+  end
+
   create_table "articles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "title"
     t.text "content"
@@ -60,7 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_02_111645) do
   end
 
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.text "comment_content", null: false
+    t.text "comment_content"
     t.bigint "user_id", null: false
     t.bigint "article_id", null: false
     t.datetime "created_at", null: false
@@ -79,6 +89,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_02_111645) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
+  create_table "tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
@@ -95,6 +112,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_02_111645) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "article_relationships", "articles"
+  add_foreign_key "article_relationships", "tags"
   add_foreign_key "articles", "users"
   add_foreign_key "comments", "articles"
   add_foreign_key "comments", "users"
