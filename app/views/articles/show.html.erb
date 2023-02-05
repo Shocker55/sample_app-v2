@@ -15,7 +15,7 @@
   </span>
 <div class="comments">
   <h2>コメントをする</h2>
-    <%=  form_with(model:[@article, @comment], method: :post) do |f| %>
+    <%=  form_with(model:[@article, @comment], local: true) do |f| %>
       <%= f.text_area :comment_content %>
       <%= f.hidden_field :article_id, value: @article.id %>
       <%= f.submit 'コメントする' %>

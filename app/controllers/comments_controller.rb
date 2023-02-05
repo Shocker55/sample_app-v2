@@ -3,8 +3,7 @@ class CommentsController < ApplicationController
   before_action :correct_user, only: :destroy
 
   def create
-    @comment = current_user.comments.new(comment_params)
-    @comment.save
+    @comment = current_user.comments.create(comment_params)
     redirect_to request.referer || root_url
   end
 
