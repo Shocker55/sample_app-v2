@@ -6,10 +6,9 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.build
   end
 
-  # def index
-  #   @articles = current_user.articles.all
-  #   @article = current_user.articles.new
-  # end
+  def index
+    @articles = params[:tag_id].present? ? Tag.find(params[:tag_id]).articles : Article.all
+  end
 
   def show
     @article = Article.find(params[:id])
@@ -38,6 +37,10 @@ class ArticlesController < ApplicationController
     else
       redirect_to request.referer, status: :see_other
     end
+  end
+
+  def tags
+    @tags = Tag.all
   end
 
   private
