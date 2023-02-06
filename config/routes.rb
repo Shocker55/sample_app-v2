@@ -14,9 +14,9 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  resources :articles, only: %i[new show create destroy]
   resources :articles do
     resources :comments, only: %i[create destroy]
+    get :tags, on: :collection
   end
   resources :relationships, only: %i[create destroy]
   get '/articles', to: 'static_pages#home'
