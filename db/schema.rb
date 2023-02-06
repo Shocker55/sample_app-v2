@@ -70,7 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_04_111013) do
   end
 
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.text "comment_content"
+    t.text "comment_content", null: false
     t.bigint "user_id", null: false
     t.bigint "article_id", null: false
     t.datetime "created_at", null: false
@@ -90,7 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_04_111013) do
   end
 
   create_table "tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_tags_on_name", unique: true
