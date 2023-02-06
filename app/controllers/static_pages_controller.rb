@@ -5,6 +5,7 @@ class StaticPagesController < ApplicationController
     if user_signed_in?
       @article = current_user.articles.build
       @feed_items = current_user.feed.page(params[:page]).per(30)
+      @comments = Comment.where(article_id: current_user.articles.ids)
     end
   end
 

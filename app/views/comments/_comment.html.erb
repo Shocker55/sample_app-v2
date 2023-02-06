@@ -1,0 +1,10 @@
+<% unless @comments == nil %>
+  <ul class="comments">
+    <% @comments.each do |comment| %>
+      <% unless comment.user == current_user%>
+      <%= link_to comment.user.name, user_path(id: comment.user.id) %>が
+      <%= link_to comment.article.title, article_path(id: comment.article.id) %>にコメントしました。<br>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
